@@ -1,99 +1,113 @@
-
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mis Tareas</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="header-oscuro">
+    <div class="header-contenido">
+      <ion-title>Mis Tareas</ion-title>
+      <span class="contador-tareas">
+        {{ tasks.length }} {{ tasks.length === 1 ? 'pendiente' : 'pendientes' }}
+      </span>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div class="contenedor-principal">
 
-  <ion-item class="entrada-tarea">
-    <ion-input
-      type="text"
-      name="task"
-      placeholder="Nueva Tarea"
-      [(ngModel)]="task"
-      (keyup.enter)="addTask()">
-    </ion-input>
+    <ion-item lines="none" class="entrada-tarea">
+      <ion-input
+        type="text"
+        name="task"
+        placeholder="Escribe una nueva tarea..."
+        [(ngModel)]="task"
+        (keyup.enter)="addTask()">
+      </ion-input>
 
-    <ion-button
-      slot="end"
-      aria-label="Agregar tarea"
-      [disabled]="!task.trim()"
-      (click)="addTask()">
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-button>
-  </ion-item>
-
-  @if (tasks.length === 0) {
-    <ion-item lines="none">
-      <ion-label>No hay tareas pendientes.</ion-label>
+      <ion-button
+        slot="end"
+        class="btn-agregar"
+        aria-label="Agregar tarea"
+        [disabled]="!task.trim()"
+        (click)="addTask()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
     </ion-item>
-  } @else {
-    <ion-list class="lista-tareas">
 
-      <ion-reorder-group
-        [disabled]="false"
-        (ionItemReorder)="reordenarTareas($event)">
+    @if (tasks.length === 0) {
+      <div class="estado-vacio">
+        <p>No hay tareas pendientes</p>
+        <span>Agrega una arriba para comenzar</span>
+      </div>
+    } @else {
+      <ion-list class="lista-tareas">
 
-        @for (taskItem of tasks; track taskItem) {
-          <ion-item class="tarea">
+        <ion-reorder-group
+          [disabled]="false"
+          (ionItemReorder)="reordenarTareas($event)">
 
-            @if (editingIndex === $index) {
-              <ion-input
-                type="text"
-                placeholder="Editar tarea"
-                [(ngModel)]="editingTask"
-                (keyup.enter)="saveTask($index)">
-              </ion-input>
+          @for (taskItem of tasks; track taskItem) {
+            <ion-item
+              lines="none"
+              class="tarea"
+              [class.tarea-editando]="editingIndex === $index">
 
-              <ion-button
-                fill="clear"
-                color="success"
-                aria-label="Guardar cambios"
-                (click)="saveTask($index)">
-                <ion-icon name="checkmark-outline"></ion-icon>
-              </ion-button>
+              @if (editingIndex === $index) {
+                <ion-input
+                  type="text"
+                  class="input-edicion"
+                  placeholder="Editar tarea"
+                  [(ngModel)]="editingTask"
+                  (keyup.enter)="saveTask($index)">
+                </ion-input>
 
-              <ion-button
-                fill="clear"
-                color="medium"
-                aria-label="Cancelar edición"
-                (click)="cancelEdit()">
-                <ion-icon name="close-outline"></ion-icon>
-              </ion-button>
+                <ion-button
+                  fill="clear"
+                  class="btn-accion btn-guardar"
+                  aria-label="Guardar cambios"
+                  (click)="saveTask($index)">
+                  <ion-icon name="checkmark-outline"></ion-icon>
+                </ion-button>
 
-            } @else {
-              <ion-label>{{ taskItem }}</ion-label>
+                <ion-button
+                  fill="clear"
+                  class="btn-accion btn-cancelar"
+                  aria-label="Cancelar edición"
+                  (click)="cancelEdit()">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-button>
 
-              <ion-button
-                fill="clear"
-                color="primary"
-                aria-label="Editar tarea"
-                (click)="editTask($index)">
-                <ion-icon name="create-outline"></ion-icon>
-              </ion-button>
+              } @else {
+                <span class="indicador-estado" aria-hidden="true"></span>
+                <ion-label>{{ taskItem }}</ion-label>
 
-              <ion-button
-                fill="clear"
-                color="danger"
-                aria-label="Eliminar tarea"
-                (click)="deleteTask($index)">
-                <ion-icon name="trash-outline"></ion-icon>
-              </ion-button>
+                <ion-button
+                  fill="clear"
+                  class="btn-accion btn-editar"
+                  aria-label="Editar tarea"
+                  (click)="editTask($index)">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
 
-              <ion-reorder
-                slot="end"
-                aria-label="Mover tarea">
-              </ion-reorder>
-            }
+                <ion-button
+                  fill="clear"
+                  class="btn-accion btn-eliminar"
+                  aria-label="Eliminar tarea"
+                  (click)="deleteTask($index)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
 
-          </ion-item>
-        }
+                <ion-reorder
+                  slot="end"
+                  class="icono-reordenar"
+                  aria-label="Mover tarea">
+                </ion-reorder>
+              }
 
-      </ion-reorder-group>
+            </ion-item>
+          }
 
-    </ion-list>
-  }
+        </ion-reorder-group>
 
+      </ion-list>
+    }
+
+  </div>
 </ion-content>

@@ -1,58 +1,234 @@
 :host {
   display: block;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
+/* --- Barra superior --- */
 ion-header,
-ion-toolbar {
-  --background: #577de6;
-  --color: #da1212;
+ion-toolbar.header-oscuro {
+  --background: linear-gradient(90deg, #060f1e 0%, #0b1e38 50%, #072229 100%);
+  --color: #f0f9ff;
+  --min-height: 66px;
+  border-bottom: 1px solid rgba(45, 212, 191, 0.25);
+}
+
+.header-contenido {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 ion-title {
-  color: #000000;
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
+  padding: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-align: left;
+  background: linear-gradient(90deg, #38bdf8 0%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+.contador-tareas {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #a7f3d0;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(52, 211, 153, 0.38);
+}
+
+/* --- Fondo principal oscuro en azul profundo --- */
 ion-content {
-  --background: #bfdef0;
-  --color: #535252;
+  --background: radial-gradient(circle at 50% 0%, #0e2544 0%, #071120 52%, #040912 100%);
+  --color: #e2e8f0;
 }
 
-.entrada-tarea,
-.tarea {
-  --background: #f8f7f7;
-  --color: #030303;
-  --border-color: #0e0611;
-  --border-radius: 12px;
-  margin: 10px 12px;
-  --padding-start: 12px;
+.contenedor-principal {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 18px 14px 32px;
+}
+
+/* --- Caja de "Nueva Tarea" con acento verde esmeralda --- */
+.entrada-tarea {
+  --background: linear-gradient(135deg, rgba(11, 33, 48, 0.95) 0%, rgba(12, 26, 48, 0.95) 100%);
+  --color: #f0fdf4;
+  --border-radius: 16px;
+  --padding-start: 16px;
   --inner-padding-end: 8px;
+  --min-height: 58px;
+  margin: 0 0 20px;
+  border-radius: 16px;
+  border: 1.5px solid rgba(16, 185, 129, 0.5);
+  box-shadow:
+    0 10px 25px rgba(2, 6, 23, 0.65),
+    0 0 18px rgba(16, 185, 129, 0.14);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus-within {
+    border-color: #34d399;
+    box-shadow:
+      0 10px 28px rgba(2, 6, 23, 0.75),
+      0 0 22px rgba(52, 211, 153, 0.28);
+  }
 }
 
 ion-input {
-  --color: #050404;
-  --placeholder-color: #13cc23;
-  --background: #f7f7f7;
+  --background: transparent;
+  --color: #f8fafc;
+  --placeholder-color: #34d399;
+  --placeholder-opacity: 0.85;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
+.btn-agregar {
+  --background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+  --background-hover: linear-gradient(135deg, #38bdf8 0%, #34d399 100%);
+  --background-activated: #059669;
+  --color: #ffffff;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+  width: 40px;
+  height: 40px;
+  margin: 0;
+
+  &[disabled] {
+    --background: rgba(30, 58, 95, 0.55);
+    --color: #64748b;
+    --box-shadow: none;
+    opacity: 0.7;
+  }
+}
+
+/* --- Lista y tarjetas de tareas --- */
 .lista-tareas {
   background: transparent;
-  padding: 5px 0 12px;
+  padding: 0;
+}
+
+.tarea {
+  --background: rgba(13, 27, 50, 0.9);
+  --background-hover: rgba(18, 37, 68, 0.98);
+  --color: #f1f5f9;
+  --border-radius: 14px;
+  --padding-start: 14px;
+  --inner-padding-end: 8px;
+  --min-height: 58px;
+  margin: 0 0 11px;
+  border-radius: 14px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  box-shadow:
+    0 6px 16px rgba(2, 6, 23, 0.55),
+    inset 0 1px 0 rgba(125, 211, 252, 0.08);
+  transition: transform 0.16s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: rgba(45, 212, 191, 0.52);
+    box-shadow:
+      0 8px 20px rgba(2, 6, 23, 0.72),
+      0 0 14px rgba(45, 212, 191, 0.14);
+  }
+
+  &.tarea-editando {
+    --background: rgba(12, 36, 52, 0.98);
+    border-color: #34d399;
+    box-shadow:
+      0 8px 22px rgba(2, 6, 23, 0.75),
+      0 0 16px rgba(16, 185, 129, 0.25);
+  }
+}
+
+.indicador-estado {
+  width: 9px;
+  height: 9px;
+  min-width: 9px;
+  border-radius: 50%;
+  margin-right: 13px;
+  background: linear-gradient(135deg, #38bdf8 0%, #10b981 100%);
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.75);
 }
 
 ion-label {
-  color: #000000 !important;
-  font-size: 16px;
+  color: #f1f5f9 !important;
+  font-size: 0.98rem;
+  font-weight: 500;
   white-space: normal;
+  line-height: 1.35;
 }
 
-ion-button {
-  --border-radius: 8px;
+.input-edicion {
+  --color: #ecfdf5;
+  --placeholder-color: #6ee7b7;
+  border-bottom: 1.5px solid #34d399;
+  margin-right: 6px;
 }
 
-ion-icon {
-  font-size: 21px;
+/* --- Botones de acción en tonos azul, verde y acento suave --- */
+.btn-accion {
+  --border-radius: 10px;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  height: 36px;
+  margin: 0 2px;
+
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.btn-editar {
+  --color: #38bdf8;
+  --background-hover: rgba(56, 189, 248, 0.14);
+}
+
+.btn-eliminar {
+  --color: #5eead4;
+  --background-hover: rgba(244, 63, 94, 0.16);
+
+  &:hover {
+    --color: #fb7185;
+  }
+}
+
+.btn-guardar {
+  --color: #34d399;
+  --background-hover: rgba(52, 211, 153, 0.16);
+}
+
+.btn-cancelar {
+  --color: #94a3b8;
+  --background-hover: rgba(148, 163, 184, 0.14);
+}
+
+.icono-reordenar {
+  color: #2dd4bf;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
+/* --- Mensaje cuando la lista está vacía --- */
+.estado-vacio {
+  text-align: center;
+  padding: 42px 20px;
+  border-radius: 16px;
+  background: rgba(13, 27, 50, 0.65);
+  border: 1px dashed rgba(56, 189, 248, 0.3);
+
+  p {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #bae6fd;
+  }
+
+  span {
+    font-size: 0.88rem;
+    color: #6ee7b7;
+  }
 }
