@@ -1,0 +1,58 @@
+:host {
+  display: block;
+  color-scheme: light;
+}
+
+ion-header,
+ion-toolbar {
+  --background: #577de6;
+  --color: #da1212;
+}
+
+ion-title {
+  color: #000000;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+ion-content {
+  --background: #bfdef0;
+  --color: #535252;
+}
+
+.entrada-tarea,
+.tarea {
+  --background: #f8f7f7;
+  --color: #030303;
+  --border-color: #0e0611;
+  --border-radius: 12px;
+  margin: 10px 12px;
+  --padding-start: 12px;
+  --inner-padding-end: 8px;
+}
+
+ion-input {
+  --color: #050404;
+  --placeholder-color: #13cc23;
+  --background: #f7f7f7;
+}
+
+.lista-tareas {
+  background: transparent;
+  padding: 5px 0 12px;
+}
+
+ion-label {
+  color: #000000 !important;
+  font-size: 16px;
+  white-space: normal;
+}
+
+ion-button {
+  --border-radius: 8px;
+}
+
+ion-icon {
+  font-size: 21px;
+}
